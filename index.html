@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northern Arena — Birthday Coffee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1c1410;
+    --ink-soft: #6b5d52;
+    --ink-faint: #a3978c;
+    --cream: #f6f0e7;
+    --paper: #fffdf9;
+    --line: rgba(28,20,16,0.10);
+    --espresso: #2a1a10;
+    --crema: #c8853f;
+    --crema-deep: #a8682a;
+    --green: #4a7a2a;
+    --green-bg: #e8f0dd;
+    --red: #b03a2e;
+    --red-bg: #f7e6e2;
+    --blue: #2f6aa8;
+    --blue-bg: #e3eef8;
+    --gray: #6b5d52;
+    --gray-bg: #ece5da;
+    --radius: 22px;
+    --radius-sm: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Hanken Grotesk', sans-serif;
+    background: var(--espresso);
+    background-image:
+      radial-gradient(circle at 20% 18%, rgba(200,133,63,0.16), transparent 42%),
+      radial-gradient(circle at 82% 82%, rgba(200,133,63,0.10), transparent 45%);
+    color: var(--ink);
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { width: 100%; max-width: 440px; position: relative; }
+  .ticket {
+    background: var(--paper); border-radius: var(--radius); overflow: hidden;
+    box-shadow: 0 30px 70px -20px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04);
+    position: relative; opacity: 0; transform: translateY(18px);
+    animation: rise 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+  @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+  .top { background: var(--espresso); color: var(--cream); padding: 26px 28px 22px; position: relative; overflow: hidden; }
+  .top::after {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 15% 30%, rgba(200,133,63,0.25), transparent 40%),
+      radial-gradient(circle at 90% 70%, rgba(200,133,63,0.14), transparent 45%);
+    pointer-events: none;
+  }
+  .brand { display: flex; align-items: center; gap: 11px; position: relative; }
+  .mark {
+    width: 38px; height: 38px; border-radius: 11px; background: var(--crema); color: var(--espresso);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-weight: 600; font-size: 20px; flex-shrink: 0;
+  }
+  .brand-name { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 500; letter-spacing: 0.2px; }
+  .brand-sub { font-size: 12.5px; color: rgba(246,240,231,0.6); letter-spacing: 1.4px; text-transform: uppercase; margin-top: 1px; }
+  .perf { position: relative; height: 26px; background: var(--paper); }
+  .perf::before { content: ""; position: absolute; top: 50%; left: 0; right: 0; border-top: 2px dashed var(--line); transform: translateY(-50%); }
+  .notch { position: absolute; top: 50%; width: 26px; height: 26px; background: var(--espresso); border-radius: 50%; transform: translateY(-50%); }
+  .notch.l { left: -13px; }
+  .notch.r { right: -13px; }
+  .body { padding: 8px 30px 32px; text-align: center; }
+  .badge { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.4px; padding: 7px 14px; border-radius: 100px; margin-bottom: 20px; }
+  .badge .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .cup { width: 90px; height: 90px; margin: 4px auto 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; }
+  .cup svg { width: 46px; height: 46px; }
+  .steam { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
+  .steam span { width: 3px; height: 14px; background: currentColor; border-radius: 3px; opacity: 0; animation: steam 2.4s ease-in-out infinite; }
+  .steam span:nth-child(2) { animation-delay: 0.4s; }
+  .steam span:nth-child(3) { animation-delay: 0.8s; }
+  @keyframes steam { 0% { opacity: 0; transform: translateY(4px) scaleY(0.6); } 40% { opacity: 0.5; } 100% { opacity: 0; transform: translateY(-10px) scaleY(1.1); } }
+  .name { font-family: 'Fraunces', serif; font-size: 30px; font-weight: 500; line-height: 1.1; margin-bottom: 6px; }
+  .offer { font-size: 15px; color: var(--ink-soft); margin-bottom: 22px; }
+  .headline { font-size: 18px; font-weight: 600; margin-bottom: 7px; }
+  .detail { font-size: 14px; color: var(--ink-soft); line-height: 1.55; max-width: 300px; margin: 0 auto 22px; }
+  .countdown { display: flex; justify-content: center; gap: 10px; margin-bottom: 24px; }
+  .cd-box { background: var(--cream); border-radius: var(--radius-sm); padding: 12px 0; min-width: 78px; }
+  .cd-num { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 600; line-height: 1; color: var(--espresso); }
+  .cd-label { font-size: 11px; color: var(--ink-faint); letter-spacing: 0.6px; text-transform: uppercase; margin-top: 6px; }
+  .btn { width: 100%; padding: 16px; border: none; border-radius: 14px; font-family: 'Hanken Grotesk', sans-serif; font-size: 16px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 9px; transition: transform 0.15s, box-shadow 0.2s, background 0.2s; }
+  .btn-redeem { background: var(--crema); color: var(--espresso); box-shadow: 0 8px 20px -8px rgba(200,133,63,0.7); }
+  .btn-redeem:hover { background: var(--crema-deep); transform: translateY(-1px); }
+  .btn-redeem:active { transform: translateY(0) scale(0.99); }
+  .btn svg { width: 18px; height: 18px; }
+  .foot { border-top: 1px dashed var(--line); margin-top: 24px; padding-top: 16px; font-size: 12px; color: var(--ink-faint); line-height: 1.5; }
+  .foot strong { color: var(--ink-soft); font-weight: 600; }
+  .stamp { position: absolute; top: 84px; right: 18px; border: 3px solid var(--red); color: var(--red); font-family: 'Fraunces', serif; font-weight: 600; font-size: 15px; letter-spacing: 1px; padding: 5px 12px; border-radius: 8px; transform: rotate(-13deg); opacity: 0.82; text-transform: uppercase; animation: stampIn 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+  @keyframes stampIn { from { transform: rotate(-13deg) scale(2); opacity: 0; } to { transform: rotate(-13deg) scale(1); opacity: 0.82; } }
+  .demo { margin-top: 22px; text-align: center; }
+  .demo-label { font-size: 11px; color: rgba(246,240,231,0.45); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 10px; }
+  .demo-btns { display: flex; gap: 7px; justify-content: center; flex-wrap: wrap; }
+  .demo-btn { background: rgba(246,240,231,0.07); color: rgba(246,240,231,0.8); border: 1px solid rgba(246,240,231,0.14); font-family: 'Hanken Grotesk', sans-serif; font-size: 12.5px; font-weight: 500; padding: 8px 14px; border-radius: 100px; cursor: pointer; transition: all 0.18s; }
+  .demo-btn:hover { background: rgba(200,133,63,0.22); border-color: var(--crema); color: var(--cream); }
+  .confetti { position: absolute; inset: 0; overflow: hidden; pointer-events: none; border-radius: var(--radius); }
+  .confetti i { position: absolute; top: -12px; width: 9px; height: 9px; border-radius: 2px; animation: fall linear forwards; }
+  @keyframes fall { to { transform: translateY(620px) rotate(540deg); opacity: 0; } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="ticket">
+      <div class="confetti" id="confetti"></div>
+      <div class="top">
+        <div class="brand">
+          <div class="mark">NA</div>
+          <div>
+            <div class="brand-name">Northern Arena</div>
+            <div class="brand-sub">Caf&eacute; Reward</div>
+          </div>
+        </div>
+      </div>
+      <div class="perf">
+        <div class="notch l"></div>
+        <div class="notch r"></div>
+      </div>
+      <div class="body" id="body"></div>
+    </div>
+    <div class="demo">
+      <div class="demo-label">Demo &middot; preview states</div>
+      <div class="demo-btns">
+        <button class="demo-btn" onclick="setState('valid')">Valid</button>
+        <button class="demo-btn" onclick="setState('used')">Used</button>
+        <button class="demo-btn" onclick="setState('expired')">Expired</button>
+        <button class="demo-btn" onclick="setState('early')">Too early</button>
+      </div>
+    </div>
+  </div>
+<script>
+  const member = { name: "Sarah Johnson", windowStart: "3 June", windowEnd: "9 June 2026", daysLeft: 4 };
+  const cupSVG = (color) => '<svg viewBox="0 0 24 24" fill="none" stroke="' + color + '" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V9z"/><path d="M17 10h2a2.5 2.5 0 0 1 0 5h-2"/><path d="M7 5c0-.8.5-1.2.5-2M11 5c0-.8.5-1.2.5-2"/></svg>';
+  const checkSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>';
+  function setState(state) {
+    const b = document.getElementById('body');
+    clearConfetti();
+    const stamp = document.querySelector('.stamp'); if (stamp) stamp.remove();
+    if (state === 'valid') {
+      b.innerHTML =
+        '<div class="badge" style="background:var(--green-bg);color:var(--green)"><span class="dot" style="background:var(--green)"></span>Happy birthday week</div>' +
+        '<div class="cup" style="background:var(--green-bg);color:var(--green)"><div class="steam"><span></span><span></span><span></span></div>' + cupSVG('#4a7a2a') + '</div>' +
+        '<div class="name">' + member.name + '</div>' +
+        '<div class="offer">One free coffee, on the house &#127874;</div>' +
+        '<div class="countdown"><div class="cd-box"><div class="cd-num">' + member.daysLeft + '</div><div class="cd-label">days left</div></div><div class="cd-box"><div class="cd-num">1</div><div class="cd-label">coffee</div></div></div>' +
+        '<button class="btn btn-redeem" onclick="redeem()">' + checkSVG + 'Redeem at the caf&eacute;</button>' +
+        '<div class="foot"><strong>Caf&eacute; team:</strong> tap redeem in front of the member. This can only be used once and can&rsquo;t be undone.</div>';
+      launchConfetti();
+    } else if (state === 'used') {
+      b.innerHTML =
+        '<div class="badge" style="background:var(--red-bg);color:var(--red)"><span class="dot" style="background:var(--red)"></span>Redeemed</div>' +
+        '<div class="cup" style="background:var(--red-bg);color:var(--red)">' + cupSVG('#b03a2e') + '</div>' +
+        '<div class="name">' + member.name + '</div>' +
+        '<div class="offer">Birthday coffee reward</div>' +
+        '<div class="headline" style="color:var(--red)">Already redeemed</div>' +
+        '<div class="detail">This coffee was claimed on 4 June 2026 at 10:32am. Enjoy the rest of your birthday week!</div>' +
+        '<div class="foot"><strong>Questions?</strong> Reception &middot; 09 421 9700</div>';
+      addStamp('Used');
+    } else if (state === 'expired') {
+      b.innerHTML =
+        '<div class="badge" style="background:var(--gray-bg);color:var(--gray)"><span class="dot" style="background:var(--gray)"></span>Expired</div>' +
+        '<div class="cup" style="background:var(--gray-bg);color:var(--gray)">' + cupSVG('#6b5d52') + '</div>' +
+        '<div class="name">' + member.name + '</div>' +
+        '<div class="offer">Birthday coffee reward</div>' +
+        '<div class="headline" style="color:var(--gray)">This offer has expired</div>' +
+        '<div class="detail">Your birthday week ran ' + member.windowStart + '&ndash;' + member.windowEnd + '. Catch you next year for another one!</div>' +
+        '<div class="foot"><strong>Questions?</strong> Reception &middot; 09 421 9700</div>';
+    } else if (state === 'early') {
+      b.innerHTML =
+        '<div class="badge" style="background:var(--blue-bg);color:var(--blue)"><span class="dot" style="background:var(--blue)"></span>Coming soon</div>' +
+        '<div class="cup" style="background:var(--blue-bg);color:var(--blue)">' + cupSVG('#2f6aa8') + '</div>' +
+        '<div class="name">' + member.name + '</div>' +
+        '<div class="offer">Birthday coffee reward</div>' +
+        '<div class="headline" style="color:var(--blue)">Not quite yet!</div>' +
+        '<div class="detail">Your free coffee unlocks on ' + member.windowStart + '. Pop back during your birthday week to claim it.</div>' +
+        '<div class="foot"><strong>Questions?</strong> Reception &middot; 09 421 9700</div>';
+    }
+  }
+  function redeem() { setState('used'); }
+  function addStamp(text) {
+    const t = document.querySelector('.ticket');
+    const s = document.createElement('div'); s.className = 'stamp'; s.textContent = text; t.appendChild(s);
+  }
+  function launchConfetti() {
+    const c = document.getElementById('confetti');
+    const colors = ['#c8853f', '#4a7a2a', '#2f6aa8', '#e0b15f', '#a8682a'];
+    for (let i = 0; i < 28; i++) {
+      const p = document.createElement('i');
+      p.style.left = Math.random() * 100 + '%';
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      p.style.animationDuration = (2.2 + Math.random() * 1.8) + 's';
+      p.style.animationDelay = (Math.random() * 0.6) + 's';
+      p.style.opacity = 0.9;
+      c.appendChild(p);
+    }
+  }
+  function clearConfetti() { document.getElementById('confetti').innerHTML = ''; }
+  setState('valid');
+</script>
+</body>
+</html>
